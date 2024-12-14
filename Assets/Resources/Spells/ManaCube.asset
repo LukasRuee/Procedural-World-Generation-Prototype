@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c657279f697624996d453ba277e0a6, type: 3}
+  m_Name: ManaCube
+  m_EditorClassIdentifier: 
+  <ItemName>k__BackingField: Mana Cube
+  <ItemDescription>k__BackingField: Desrtoys blocks
+  <Icon>k__BackingField: {fileID: 0}
+  <Prefab>k__BackingField: {fileID: 8862824110295458158, guid: 999c8ec5562d75244b1f166dfc2bac34, type: 3}
+  <Tier>k__BackingField: 1
+  <ManaCost>k__BackingField: 20
+  <Damage>k__BackingField: 5
+  <LiveTime>k__BackingField: 8
+  <EffectRadius>k__BackingField: 3
+  <VoxelInteraction>k__BackingField:
+  - <TargetVoxelToReplace>k__BackingField: {fileID: 11400000, guid: 20ad8f3ddf839744b8de74f16e3f0ca8, type: 2}
+    <ReplacementVoxel>k__BackingField: {fileID: 11400000, guid: e0b55a9bbe9472547851397715620783, type: 2}
+    <ParticleSystemPrefab>k__BackingField: {fileID: 8872622350270142426, guid: a21c413a48b62a241906d3fd1101c0af, type: 3}
+  - <TargetVoxelToReplace>k__BackingField: {fileID: 11400000, guid: 154dc565e41cbce4da2bd82b65ef1c6a, type: 2}
+    <ReplacementVoxel>k__BackingField: {fileID: 11400000, guid: e0b55a9bbe9472547851397715620783, type: 2}
+    <ParticleSystemPrefab>k__BackingField: {fileID: 8872622350270142426, guid: a21c413a48b62a241906d3fd1101c0af, type: 3}
+  - <TargetVoxelToReplace>k__BackingField: {fileID: 11400000, guid: e04a6bdb0b42b5d42a74b2a99a566650, type: 2}
+    <ReplacementVoxel>k__BackingField: {fileID: 11400000, guid: e0b55a9bbe9472547851397715620783, type: 2}
+    <ParticleSystemPrefab>k__BackingField: {fileID: 8872622350270142426, guid: a21c413a48b62a241906d3fd1101c0af, type: 3}
+  - <TargetVoxelToReplace>k__BackingField: {fileID: 11400000, guid: a6c28a2544a88824a8e113ca9b4d91af, type: 2}
+    <ReplacementVoxel>k__BackingField: {fileID: 11400000, guid: e0b55a9bbe9472547851397715620783, type: 2}
+    <ParticleSystemPrefab>k__BackingField: {fileID: 8872622350270142426, guid: a21c413a48b62a241906d3fd1101c0af, type: 3}
+  - <TargetVoxelToReplace>k__BackingField: {fileID: 11400000, guid: 9fed368dcff074c4cbc1b74db46fdca4, type: 2}
+    <ReplacementVoxel>k__BackingField: {fileID: 11400000, guid: e0b55a9bbe9472547851397715620783, type: 2}
+    <ParticleSystemPrefab>k__BackingField: {fileID: 8872622350270142426, guid: a21c413a48b62a241906d3fd1101c0af, type: 3}
+  - <TargetVoxelToReplace>k__BackingField: {fileID: 11400000, guid: be35560295c5928409105b399e9cf4db, type: 2}
+    <ReplacementVoxel>k__BackingField: {fileID: 11400000, guid: e0b55a9bbe9472547851397715620783, type: 2}
+    <ParticleSystemPrefab>k__BackingField: {fileID: 8872622350270142426, guid: a21c413a48b62a241906d3fd1101c0af, type: 3}
+  - <TargetVoxelToReplace>k__BackingField: {fileID: 11400000, guid: 62267b9e5013e9f44bb34c353f39f900, type: 2}
+    <ReplacementVoxel>k__BackingField: {fileID: 11400000, guid: e0b55a9bbe9472547851397715620783, type: 2}
+    <ParticleSystemPrefab>k__BackingField: {fileID: 8872622350270142426, guid: a21c413a48b62a241906d3fd1101c0af, type: 3}
+  - <TargetVoxelToReplace>k__BackingField: {fileID: 11400000, guid: d3372d56650e99c488005e0499c4376d, type: 2}
+    <ReplacementVoxel>k__BackingField: {fileID: 11400000, guid: e0b55a9bbe9472547851397715620783, type: 2}
+    <ParticleSystemPrefab>k__BackingField: {fileID: 8872622350270142426, guid: a21c413a48b62a241906d3fd1101c0af, type: 3}

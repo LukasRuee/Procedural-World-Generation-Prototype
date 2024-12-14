@@ -1,0 +1,80 @@
+﻿#pragma kernel PerlinNoise
+struct NoiseSettings
+{
+    float Frequency;
+    float Threshold;
+    int ID;
+};
+
+RWStructuredBuffer<int> random;
+RWStructuredBuffer<int> voxelMap;
+RWStructuredBuffer<int> startXYZ;
+RWStructuredBuffer<int> chunkSize;
+RWStructuredBuffer<NoiseSettings> settings;
+
+int PositionToIndex(int x, int y, int z)
+{
+    return x + chunkSize[0] * (y + chunkSize[0] * z);
+}
+
+float fade(float t)
+{
+    return t * t * t * (t * (t * 6 - 15) + 10);
+}
+
+float lerp(float t, float a, float b)
+{
+    return a + t * (b - a);
+}
+
+float grad(int hash, float x, float y, float z)
+{
+    int h = hash & 15;
+    float u = h < 8 ? x : y,
+        v = h < 4 ? y : h == 12 || h == 14 ? x : z;
+    return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
+}
+
+[numthreads(8, 8, 8)]
+void PerlinNoise(uint3 id : SV_DispatchThreadID)
+{
+    uint numSettings;
+    uint settingsStride;
+    settings.GetDimensions(numSettings, settingsStride);
+    
+    uint randomCount;
+    uint randomStride;
+    random.GetDimensions(randomCount, randomStride);
+    for (uint i = 0; i < numSettings; i++)
+    {
+        int randomOffset = i * (randomCount / numSettings);
+        float x = (float) id.x / chunkSize[0] * settings[i].Frequency + (float) startXYZ[0] / chunkSize[0] * settings[i].Frequency;
+        float y = (float) id.y / chunkSize[0] * settings[i].Frequency + (float) startXYZ[1] / chunkSize[0] * settings[i].Frequency;
+        float z = (float) id.z / chunkSize[0] * settings[i].Frequency + (float) startXYZ[2] / chunkSize[0] * settings[i].Frequency;
+
+        int X = (int) floor(x) & 255, // FIND UNIT CUBE THAT
+        Y = (int) floor(y) & 255, // CONTAINS POINT.
+        Z = (int) floor(z) & 255;
+        
+        x -= floor(x); // FIND RELATIVE X,Y,Z
+        y -= floor(y); // OF POINT IN CUBE.
+        z -= floor(z);
+        
+        float u = fade(x), // COMPUTE FADE CURVES
+            v = fade(y), // FOR EACH OF X,Y,Z.
+            w = fade(z);
+        int A = random[randomOffset + X] + Y, AA = random[randomOffset + A] + Z, AB = random[randomOffset + A + 1] + Z, // HASH COORDINATES OF
+        B = random[randomOffset + X + 1] + Y, BA = random[randomOffset + B] + Z, BB = random[randomOffset + B + 1] + Z; // THE 8 CUBE CORNERS,
+
+        float res = lerp(w, lerp(v, lerp(u, grad(random[randomOffset + AA], x, y, z), // AND ADD
+                                    grad(random[randomOffset + BA], x - 1, y, z)), // BLENDED
+                            lerp(u, grad(random[randomOffset + AB], x, y - 1, z), // RESULTS
+                                    grad(random[randomOffset + BB], x - 1, y - 1, z))), // FROM  8
+                    lerp(v, lerp(u, grad(random[randomOffset + AA + 1], x, y, z - 1), // CORNERS
+                                    grad(random[randomOffset + BA + 1], x - 1, y, z - 1)), // OF CUBE
+                            lerp(u, grad(random[randomOffset + AB + 1], x, y - 1, z - 1),
+                                    grad(random[randomOffset + BB + 1], x - 1, y - 1, z - 1))));
+    
+        voxelMap[PositionToIndex(id.x, id.y, id.z)] = res > settings[i].Threshold ? settings[i].ID : voxelMap[PositionToIndex(id.x, id.y, id.z)];
+    }
+}

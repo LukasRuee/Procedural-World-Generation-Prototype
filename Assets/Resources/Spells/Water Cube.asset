@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c657279f697624996d453ba277e0a6, type: 3}
+  m_Name: Water Cube
+  m_EditorClassIdentifier: 
+  <ItemName>k__BackingField: Water Cube
+  <ItemDescription>k__BackingField: Creates water
+  <Icon>k__BackingField: {fileID: 0}
+  <Prefab>k__BackingField: {fileID: 8862824110295458158, guid: 4da59230f16547642be600f744608020, type: 3}
+  <Tier>k__BackingField: 0
+  <ManaCost>k__BackingField: 15
+  <Damage>k__BackingField: 1
+  <LiveTime>k__BackingField: 5
+  <EffectRadius>k__BackingField: 2
+  <VoxelInteraction>k__BackingField:
+  - <TargetVoxelToReplace>k__BackingField: {fileID: 11400000, guid: e0b55a9bbe9472547851397715620783, type: 2}
+    <ReplacementVoxel>k__BackingField: {fileID: 11400000, guid: b329d3cb83c19354da72bbaab31c6a6d, type: 2}
+    <ParticleSystemPrefab>k__BackingField: {fileID: 5186334827578368562, guid: 0bd10a715a40f184f996e01b114d2c10, type: 3}
+    <useReplacementVoxelMaterial>k__BackingField: 1

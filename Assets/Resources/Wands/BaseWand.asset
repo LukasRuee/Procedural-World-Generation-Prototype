@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4424cf5f42973224c8c34b29f732b2f9, type: 3}
+  m_Name: BaseWand
+  m_EditorClassIdentifier: 
+  <ItemName>k__BackingField: Base Wand
+  <ItemDescription>k__BackingField: A normal wand
+  <Icon>k__BackingField: {fileID: 0}
+  <Prefab>k__BackingField: {fileID: 1663536735336789836, guid: 9a5392ef187ebae44ab920d6965d2f94, type: 3}
+  <Tier>k__BackingField: 0
+  <MaxMana>k__BackingField: 100
+  <ManaRechargeRate>k__BackingField: 5
+  <MaxSpellSlots>k__BackingField: 3
+  <CastDelay>k__BackingField: 0.2

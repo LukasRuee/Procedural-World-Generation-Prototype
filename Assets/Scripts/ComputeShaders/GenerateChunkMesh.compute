@@ -1,0 +1,179 @@
+﻿#pragma kernel GetFacesList
+#pragma kernel GetVerts
+
+RWStructuredBuffer<int> chunkSize;
+RWStructuredBuffer<int> voxels;
+RWStructuredBuffer<int> faces;
+RWStructuredBuffer<float3> normals;
+RWStructuredBuffer<float3> verts;
+RWStructuredBuffer<float2> uvs; // Add UV buffer
+
+int PositionToIndex(int x, int y, int z)
+{
+    return x + chunkSize[0] * (y + chunkSize[0] * z);
+}
+
+bool IsInBounds(int x, int y, int z)
+{
+    return x >= 0 && x < chunkSize[0] &&
+            y >= 0 && y < chunkSize[0] &&
+            z >= 0 && z < chunkSize[0];
+}
+
+int GetVoxel(int x, int y, int z)
+{
+    if (IsInBounds(x, y, z))
+    {
+        return voxels[PositionToIndex(x, y, z)];
+    }
+    return 0;
+}
+
+[numthreads(8, 8, 8)]
+void GetFacesList(uint3 id : SV_DispatchThreadID)
+{
+    int fac = 6;
+
+    if (GetVoxel(id.x, id.y, id.z) == 1)
+    {
+        fac -= GetVoxel(id.x + 1, id.y, id.z);
+        fac -= GetVoxel(id.x - 1, id.y, id.z);
+        fac -= GetVoxel(id.x, id.y + 1, id.z);
+        fac -= GetVoxel(id.x, id.y - 1, id.z);
+        fac -= GetVoxel(id.x, id.y, id.z + 1);
+        fac -= GetVoxel(id.x, id.y, id.z - 1);
+    }
+    else
+        fac = 0;
+
+    faces[PositionToIndex(id.x, id.y, id.z)] = fac;
+}
+
+[numthreads(8, 8, 8)]
+void GetVerts(uint3 id : SV_DispatchThreadID)
+{
+    int bufferOffset = faces[PositionToIndex(id.x, id.y, id.z)] * 4;
+
+    if (voxels[PositionToIndex(id.x, id.y, id.z)] == 1)
+    {
+        // -x wall
+        if (GetVoxel(id.x - 1, id.y, id.z) == 0)
+        {
+            bufferOffset -= 4;
+            verts[0 + bufferOffset] = float3(id.x, id.y, id.z);
+            verts[1 + bufferOffset] = float3(id.x, id.y, id.z + 1);
+            verts[2 + bufferOffset] = float3(id.x, id.y + 1, id.z + 1);
+            verts[3 + bufferOffset] = float3(id.x, id.y + 1, id.z);
+            
+            normals[0 + bufferOffset] = float3(-1, 0, 0);
+            normals[1 + bufferOffset] = float3(-1, 0, 0);
+            normals[2 + bufferOffset] = float3(-1, 0, 0);
+            normals[3 + bufferOffset] = float3(-1, 0, 0);
+
+            uvs[0 + bufferOffset] = float2(0, 0);
+            uvs[1 + bufferOffset] = float2(0, 1);
+            uvs[2 + bufferOffset] = float2(1, 1);
+            uvs[3 + bufferOffset] = float2(1, 0);
+        }
+
+        // +x wall
+        if (GetVoxel(id.x + 1, id.y, id.z) == 0)
+        {
+            bufferOffset -= 4;
+            verts[0 + bufferOffset] = float3(id.x + 1, id.y, id.z);
+            verts[1 + bufferOffset] = float3(id.x + 1, id.y + 1, id.z);
+            verts[2 + bufferOffset] = float3(id.x + 1, id.y + 1, id.z + 1);
+            verts[3 + bufferOffset] = float3(id.x + 1, id.y, id.z + 1);
+
+            normals[0 + bufferOffset] = float3(1, 0, 0);
+            normals[1 + bufferOffset] = float3(1, 0, 0);
+            normals[2 + bufferOffset] = float3(1, 0, 0);
+            normals[3 + bufferOffset] = float3(1, 0, 0);
+
+            uvs[0 + bufferOffset] = float2(0, 0);
+            uvs[1 + bufferOffset] = float2(0, 1);
+            uvs[2 + bufferOffset] = float2(1, 1);
+            uvs[3 + bufferOffset] = float2(1, 0);
+        }
+
+        // +y wall
+        if (GetVoxel(id.x, id.y + 1, id.z) == 0)
+        {
+            bufferOffset -= 4;
+            verts[0 + bufferOffset] = float3(id.x, id.y + 1, id.z);
+            verts[1 + bufferOffset] = float3(id.x, id.y + 1, id.z + 1);
+            verts[2 + bufferOffset] = float3(id.x + 1, id.y + 1, id.z + 1);
+            verts[3 + bufferOffset] = float3(id.x + 1, id.y + 1, id.z);
+
+            normals[0 + bufferOffset] = float3(0, 1, 0);
+            normals[1 + bufferOffset] = float3(0, 1, 0);
+            normals[2 + bufferOffset] = float3(0, 1, 0);
+            normals[3 + bufferOffset] = float3(0, 1, 0);
+
+            uvs[0 + bufferOffset] = float2(0, 0);
+            uvs[1 + bufferOffset] = float2(0, 1);
+            uvs[2 + bufferOffset] = float2(1, 1);
+            uvs[3 + bufferOffset] = float2(1, 0);
+        }
+
+        // -y wall
+        if (GetVoxel(id.x, id.y - 1, id.z) == 0)
+        {
+            bufferOffset -= 4;
+            verts[0 + bufferOffset] = float3(id.x, id.y, id.z);
+            verts[1 + bufferOffset] = float3(id.x + 1, id.y, id.z);
+            verts[2 + bufferOffset] = float3(id.x + 1, id.y, id.z + 1);
+            verts[3 + bufferOffset] = float3(id.x, id.y, id.z + 1);
+
+            normals[0 + bufferOffset] = float3(0, -1, 0);
+            normals[1 + bufferOffset] = float3(0, -1, 0);
+            normals[2 + bufferOffset] = float3(0, -1, 0);
+            normals[3 + bufferOffset] = float3(0, -1, 0);
+
+            uvs[0 + bufferOffset] = float2(0, 0);
+            uvs[1 + bufferOffset] = float2(0, 1);
+            uvs[2 + bufferOffset] = float2(1, 1);
+            uvs[3 + bufferOffset] = float2(1, 0);
+        }
+
+        // +z wall
+        if (GetVoxel(id.x, id.y, id.z + 1) == 0)
+        {
+            bufferOffset -= 4;
+            verts[0 + bufferOffset] = float3(id.x, id.y, id.z + 1);
+            verts[1 + bufferOffset] = float3(id.x + 1, id.y, id.z + 1);
+            verts[2 + bufferOffset] = float3(id.x + 1, id.y + 1, id.z + 1);
+            verts[3 + bufferOffset] = float3(id.x, id.y + 1, id.z + 1);
+
+            normals[0 + bufferOffset] = float3(0, 0, 1);
+            normals[1 + bufferOffset] = float3(0, 0, 1);
+            normals[2 + bufferOffset] = float3(0, 0, 1);
+            normals[3 + bufferOffset] = float3(0, 0, 1);
+
+            uvs[0 + bufferOffset] = float2(0, 0);
+            uvs[1 + bufferOffset] = float2(0, 1);
+            uvs[2 + bufferOffset] = float2(1, 1);
+            uvs[3 + bufferOffset] = float2(1, 0);
+        }
+
+        // -z wall
+        if (GetVoxel(id.x, id.y, id.z - 1) == 0)
+        {
+            bufferOffset -= 4;
+            verts[0 + bufferOffset] = float3(id.x, id.y, id.z);
+            verts[1 + bufferOffset] = float3(id.x, id.y + 1, id.z);
+            verts[2 + bufferOffset] = float3(id.x + 1, id.y + 1, id.z);
+            verts[3 + bufferOffset] = float3(id.x + 1, id.y, id.z);
+
+            normals[0 + bufferOffset] = float3(0, 0, -1);
+            normals[1 + bufferOffset] = float3(0, 0, -1);
+            normals[2 + bufferOffset] = float3(0, 0, -1);
+            normals[3 + bufferOffset] = float3(0, 0, -1);
+
+            uvs[0 + bufferOffset] = float2(0, 0);
+            uvs[1 + bufferOffset] = float2(0, 1);
+            uvs[2 + bufferOffset] = float2(1, 1);
+            uvs[3 + bufferOffset] = float2(1, 0);
+        }
+    }
+}

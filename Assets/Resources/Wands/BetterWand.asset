@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4424cf5f42973224c8c34b29f732b2f9, type: 3}
+  m_Name: BetterWand
+  m_EditorClassIdentifier: 
+  <ItemName>k__BackingField: Better wand
+  <ItemDescription>k__BackingField: A better wand
+  <Icon>k__BackingField: {fileID: 0}
+  <Prefab>k__BackingField: {fileID: 1663536735336789836, guid: 0c1add73e28519c48ac22805a4bd396e, type: 3}
+  <Tier>k__BackingField: 1
+  <MaxMana>k__BackingField: 200
+  <ManaRechargeRate>k__BackingField: 10
+  <MaxSpellSlots>k__BackingField: 5
+  <CastDelay>k__BackingField: 0.1

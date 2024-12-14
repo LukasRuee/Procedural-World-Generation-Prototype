@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c657279f697624996d453ba277e0a6, type: 3}
+  m_Name: MagicArrow
+  m_EditorClassIdentifier: 
+  <ItemName>k__BackingField: Magic Arrow
+  <ItemDescription>k__BackingField: A magiv arrow which can bounce
+  <Icon>k__BackingField: {fileID: 0}
+  <Prefab>k__BackingField: {fileID: 8862824110295458158, guid: 6730343681195fa43b709d62084b002d, type: 3}
+  <Tier>k__BackingField: 2
+  <ManaCost>k__BackingField: 8
+  <Damage>k__BackingField: 4
+  <LiveTime>k__BackingField: 10
+  <CanReplaceBlocks>k__BackingField: 0
+  <EffectRadius>k__BackingField: 0
+  <ReplacementVoxel>k__BackingField: {fileID: 0}
+  <TargetVoxelToReplace>k__BackingField: {fileID: 0}

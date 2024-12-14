@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c657279f697624996d453ba277e0a6, type: 3}
+  m_Name: Fire Cube
+  m_EditorClassIdentifier: 
+  <ItemName>k__BackingField: Fire Cube
+  <ItemDescription>k__BackingField: Can make water to steam
+  <Icon>k__BackingField: {fileID: 0}
+  <Prefab>k__BackingField: {fileID: 8862824110295458158, guid: 6834d40136d9b9b46835b87c90633715, type: 3}
+  <Tier>k__BackingField: 2
+  <ManaCost>k__BackingField: 20
+  <Damage>k__BackingField: 8
+  <LiveTime>k__BackingField: 5
+  <EffectRadius>k__BackingField: 1
+  <VoxelInteraction>k__BackingField:
+  - <TargetVoxelToReplace>k__BackingField: {fileID: 11400000, guid: d3372d56650e99c488005e0499c4376d, type: 2}
+    <ReplacementVoxel>k__BackingField: {fileID: 11400000, guid: b329d3cb83c19354da72bbaab31c6a6d, type: 2}
+    <ParticleSystemPrefab>k__BackingField: {fileID: 1072594683269876863, guid: a2f22e8d604d44b40905911fceb105b2, type: 3}
+  - <TargetVoxelToReplace>k__BackingField: {fileID: 11400000, guid: b329d3cb83c19354da72bbaab31c6a6d, type: 2}
+    <ReplacementVoxel>k__BackingField: {fileID: 11400000, guid: 9adcba3adc4a168488529e6c50d38205, type: 2}
+    <ParticleSystemPrefab>k__BackingField: {fileID: 1072594683269876863, guid: a2f22e8d604d44b40905911fceb105b2, type: 3}
+  - <TargetVoxelToReplace>k__BackingField: {fileID: 11400000, guid: 154dc565e41cbce4da2bd82b65ef1c6a, type: 2}
+    <ReplacementVoxel>k__BackingField: {fileID: 11400000, guid: 6054a20d22c3ab64383050f327902870, type: 2}
+    <ParticleSystemPrefab>k__BackingField: {fileID: 1072594683269876863, guid: a2f22e8d604d44b40905911fceb105b2, type: 3}
